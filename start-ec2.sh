@@ -2,7 +2,7 @@
 
 #########################################################################
 #                                                                       # 
-# Launch a T3.medium EC2 instance; pull its ID & publicDNS name & SSH in#
+# Launch a T2.micro EC2 instance; pull its ID & publicDNS name & SSH in #
 #          with a user data script                                      # 
 #                                        gio@                           #
 #                                                         2019-05-24    #    
