@@ -7,7 +7,7 @@
 #   >> bash.rc edit, vim, tmux, htop, pip, installed                        #  
 #   >> scripts determines Linux OS then acts (AmznL2, RHEL, Ubuntu)         #  
 #                                           gio@                            # 
-#                                                               2019-04-04  #
+#                                                               2022-03-01  #
 #############################################################################
 
 
@@ -19,8 +19,6 @@ set -o pipefail
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
 OS="$(cat /etc/os-release | head -n 1 | cut -d '"' -f 2)"
-
-#echo $OS
 
 
 if [[ $OS = "Amazon Linux" ]] 
@@ -60,8 +58,7 @@ echo $(date)
 bash /home/ec2-user/screenfetch-dev
 curl https://giofernandez.com/blackcat" >> /home/ec2-user/.ssh/rc
 chown -R ec2-user:ec2-user /home/ec2-user/.ssh/rc
-mkdir /efs
-yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
+#yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
 
 
 
