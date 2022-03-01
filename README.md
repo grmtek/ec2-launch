@@ -1,7 +1,7 @@
 
 ## ec2-launch
 
-Launch a T3.micro EC2 instance, log its ID & publicDNS name, execute a user data script (os-pull.sh) & SSH in
+Launch a T3.micro EC2 instance, log its ID & publicDNS name, execute a user data script (`os-pull.sh`) & SSH in
 
 ### Usage
 `./start-ec2.sh -k '<key-name>' -sg '<security-group>'`
