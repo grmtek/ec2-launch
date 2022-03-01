@@ -6,8 +6,8 @@ Launch a T3.micro EC2 instance, log its ID & publicDNS name, execute a user data
 ### Usage
 `./start-ec2.sh -k '<key-name>' -sg '<security-group>'`
 
-- where <key-name> is your .pem keypair's name without the extension '.pem'
-- where <security-group> format example: 'sg-XXXXXX'
+- where `<key-name>` is your .pem keypair's name without the extension '.pem'
+- where `<security-group>` format example: 'sg-XXXXXX'
 
 ### Dependencies
 - jq
