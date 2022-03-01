@@ -35,9 +35,20 @@ echo "User Data script:" $userdata
 
 sleep .5
 
+###########################################################
+
+if [ ! -d "$HOME/logs/" ]; then
+  # if $HOME/logs directory doesn't exist, then create it
+  mkdir $HOME/logs/
+
+  else
+    echo "$HOME/logs exists, proceeding..."
+fi
+
+
 echo "Commencing Launch in 3..."
-sleep 1 
-echo "2..." 
+sleep 1
+echo "2..."
 sleep 1
 echo "1..."
 sleep 1
