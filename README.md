@@ -19,4 +19,4 @@ Launch a T3.micro EC2 instance, log its ID & publicDNS name, execute a user data
 ### After SSH access
 Run `install.sh` for updates if desired:
 
-`ec2-user@ip-172-31-88-176:~$ sudo ./install.sh `
+`ec2-user@ip-XXX-XX-XX-XXX:~$ sudo ./install.sh `
