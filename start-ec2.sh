@@ -2,10 +2,10 @@
 
 #########################################################################
 #                                                                       # 
-# Launch a T2.micro EC2 instance; pull its ID & publicDNS name & SSH in #
+# Launch a T3.micro EC2 instance; pull its ID & publicDNS name & SSH in #
 #          with a user data script                                      # 
 #                                        gio@                           #
-#                                                         2019-05-24    #    
+#                                                         2022-03-01    #
 #########################################################################
 
 set -o errexit
@@ -13,14 +13,19 @@ set -o errtrace
 set -o nounset
 set -o pipefail
 
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -k|--key) keyname="$2"; shift 2 ;;
+        -sg|--securitygroup) securitygroup="$2"; shift 2;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+
+  done
 amazonlinuxami="$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????-x86_64-gp2' 'Name=state,Values=available' --output json | jq -r '.Images | sort_by(.CreationDate) | last(.[]).ImageId')" 
                                                                     ## this will pull the latest Amazon Linux 2 AMI
-instancetype=t2.micro
-keyname=example_key #your key name goes here -- pass string w/o .pem / leave out .pem
-securitygroup=sg-xxxx ## your security group name goes here
-userdata=file:///os-pull.sh
-instanceprofile="gmoney-madness" ## your instance profile name goes here, or remove reference to IAM-instance profile on line 45
-
+instancetype=t3.micro
+userdata=file://os-pull.sh
 
 ###########################################################
 
@@ -42,7 +47,7 @@ sleep 1
 
 aws ec2 run-instances --image-id $amazonlinuxami --count 1 --instance-type $instancetype \
 --key-name $keyname --security-group-ids $securitygroup \
- --iam-instance-profile Name="$instanceprofile" --user-data $userdata | tee $HOME/logs/log-ec2  ## logs and processes stdout to $HOME/logs  
+ --user-data $userdata | tee $HOME/logs/log-ec2  ## logs and processes stdout to $HOME/logs  
 sleep 3.5
 echo "INSTANCE ID:"
 cat $HOME/logs/log-ec2 | grep -i "instanceid" | cut -d'"' -f4 
@@ -50,6 +55,7 @@ cat $HOME/logs/log-ec2 | grep -i "instanceid" | cut -d'"' -f4
 ###########################################################
 
 instance="$(cat $HOME/logs/log-ec2 | grep -i "instanceid" | cut -d'"' -f4)"
+
 echo "PUBLIC DNS:"
 echo $(aws ec2 describe-instances --instance-id $instance | grep -i PublicDnsName | cut -d'"' -f4 | uniq)
 publicdns="$(aws ec2 describe-instances --instance-id $instance | grep -i PublicDnsName | cut -d'"' -f4 | uniq)"
@@ -63,8 +69,8 @@ echo "Waiting for instance to change to 'Running'"
 aws ec2 wait instance-running --instance-ids "$instance"
 figlet "Running"
 
-echo "Instance running. Waiting 10 seconds for user data injection to complete"
-sleep 7
+echo "Instance running. Waiting 20 seconds for user data injection to complete"
+sleep 17
 echo "3..."
 sleep 1
 echo "2..."
