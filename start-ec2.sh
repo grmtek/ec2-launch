@@ -20,7 +20,6 @@ while [[ "$#" -gt 0 ]]; do
         -sg|--securitygroup) securitygroup="$2"; shift 2;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
-
   done
 amazonlinuxami="$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????-x86_64-gp2' 'Name=state,Values=available' --output json | jq -r '.Images | sort_by(.CreationDate) | last(.[]).ImageId')" 
                                                                     ## this will pull the latest Amazon Linux 2 AMI
