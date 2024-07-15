@@ -55,12 +55,8 @@ chmod 775 /home/ec2-user/install.sh
 touch /home/ec2-user/.ssh/rc
 echo "#!/bin/bash
 echo $(date)
-bash /home/ec2-user/screenfetch-dev
-curl https://giofernandez.com/blackcat" >> /home/ec2-user/.ssh/rc
+bash /home/ec2-user/screenfetch-dev" >> /home/ec2-user/.ssh/rc
 chown -R ec2-user:ec2-user /home/ec2-user/.ssh/rc
-#yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
-
-
 
 
 else
@@ -111,8 +107,7 @@ chmod 775 /home/ec2-user/install.sh
 touch /home/ec2-user/.ssh/rc
 echo "#!/bin/bash
 echo $(date)
-bash /home/ec2-user/screenfetch-dev
-curl https://giofernandez.com/blackcat" >> /home/ec2-user/.ssh/rc
+bash /home/ec2-user/screenfetch-dev" >> /home/ec2-user/.ssh/rc
 chown -R ec2-user:ec2-user /home/ec2-user/.ssh/rc
 
 
@@ -159,8 +154,7 @@ chmod 775 /home/ubuntu/install.sh
 touch /home/ubuntu/.ssh/rc
 echo "#!/bin/bash
 echo $(date)
-bash /home/ubuntu/screenfetch-dev
-curl https://giofernandez.com/blackcat" >> /home/ubuntu/.ssh/rc
+bash /home/ubuntu/screenfetch-dev" >> /home/ubuntu/.ssh/rc
 chown -R ubuntu:ubuntu /home/ubuntu/.ssh/rc
 #mkdir /efs
 
